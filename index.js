@@ -3,7 +3,7 @@ import path from "path";
 import methodOverride from "method-override";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-const port=8000;
+const port=process.env.PORT || 8000;
 const app=express();
 
 import userRoute from "./routes/user.js";
@@ -30,7 +30,7 @@ app.use("/signup",signupRoute);
 app.use("/login",loginRoute);
 
 async function main(){
-    mongoose.connect("mongodb://127.0.0.1:27017/healthPie");
+    mongoose.connect(process.env.MONGO_URL);
 }
 
 main().then(()=>{
@@ -64,7 +64,7 @@ app.get("/mymeals",(req,res)=>{
 })
 
 app.get("/mymeals/view",(req,res)=>{
-    let q=`https://api.spoonacular.com/recipes/findByNutrients?minVitaminB12=1&apiKey=093f59c223dc4b0b8a63411d7de1dafd`;
+    let q=`https://api.spoonacular.com/recipes/findByNutrients?minVitaminB12=1&apiKey=${SPOONACULAR_API_KEY}`;
     fetch(`${q}`)
     .then(response => {
         if (!response.ok) {
@@ -96,7 +96,7 @@ app.post("/mymeals/view",(req,res)=>{
         }
         q+=`${key}=${value}&`;
     }
-    q+=`apiKey=093f59c223dc4b0b8a63411d7de1dafd`;
+    q+=`apiKey=${SPOONACULAR_API_KEY}`;
     fetch(`${q}`)
     .then(response => {
         if (!response.ok) {
@@ -132,7 +132,7 @@ app.post("/mymeals/view",(req,res)=>{
 
 app.get("/mymeals/:id/view",(req,res)=>{
     let {id}=req.params;
-    let q=`https://api.spoonacular.com/recipes/${id}/nutritionWidget.json?apiKey=093f59c223dc4b0b8a63411d7de1dafd`;
+    let q=`https://api.spoonacular.com/recipes/${id}/nutritionWidget.json?apiKey=${SPOONACULAR_API_KEY}`;
     // console.log(q);
     fetch(`${q}`)
     .then(response => {
