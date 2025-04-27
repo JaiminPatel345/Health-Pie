@@ -82,43 +82,43 @@ export const register=async(req,res)=>{
     }
     else if(user==null){
 
-        if(role==='User'){
-            let code=200;
-            let msg="Invalid Input";
-            let description ="";
+        // if(role==='User'){
+        //     let code=200;
+        //     let msg="Invalid Input";
+        //     let description ="";
     
-            res.render("../views/error.ejs",{code,msg,description});
-            return;
-        }
+        //     res.render("../views/error.ejs",{code,msg,description});
+        //     return;
+        // }
         try {
 
-            //if user exist then compare password or check password
+        //     //if user exist then compare password or check password
     
-            const checkCorrectPass=await bcrypt.compare(
+        //     const checkCorrectPass=await bcrypt.compare(
     
-                req.body.password,
-                doctor.password
-            )
+        //         req.body.password,
+        //         doctor.password
+        //     )
     
-            //if password not correct
+        //     //if password not correct
     
-            if(!checkCorrectPass){
-                // res.json({ message: "incorrect password or email" });
-                let code=201;
-                let msg="Incorrect Email or Password";
-                let description ="";
+        //     if(!checkCorrectPass){
+        //         // res.json({ message: "incorrect password or email" });
+        //         let code=201;
+        //         let msg="Incorrect Email or Password";
+        //         let description ="";
     
-                res.render("../views/error.ejs",{code,msg,description});
-                return;
-            }
+        //         res.render("../views/error.ejs",{code,msg,description});
+        //         return;
+        //     }
     
-            const {password,role,...rest}=doctor._doc;
+        //     const {password,role,...rest}=doctor._doc;
     
     
-            //create jwt token
-             const payload={Id:doctor._id,role:doctor.role};
-             const secretKey=process.env.JWT_SECRET_KEY;
-             const token=jwt.sign(payload,secretKey,{expiresIn:"15d"})
+        //     //create jwt token
+        //      const payload={Id:doctor._id,role:doctor.role};
+        //      const secretKey=process.env.JWT_SECRET_KEY;
+        //      const token=jwt.sign(payload,secretKey,{expiresIn:"15d"})
     
              //set the token into the browser token and send the response to the client
             
@@ -153,31 +153,31 @@ export const register=async(req,res)=>{
 
             //if user exist then compare password or check password
     
-            const checkCorrectPass=await bcrypt.compare(
+            // const checkCorrectPass=await bcrypt.compare(
     
-                req.body.password,
-                user.password
-            )
+            //     req.body.password,
+            //     user.password
+            // )
     
-            //if password not correct
+            // //if password not correct
     
-            if(!checkCorrectPass){
-                // res.json({ message: "incorrect password or email" });
-                let code=201;
-                let msg="Incorrect Email or Password";
-                let description ="";
+            // if(!checkCorrectPass){
+            //     // res.json({ message: "incorrect password or email" });
+            //     let code=201;
+            //     let msg="Incorrect Email or Password";
+            //     let description ="";
     
-                res.render("../views/error.ejs",{code,msg,description});
-                return;
-            }
+            //     res.render("../views/error.ejs",{code,msg,description});
+            //     return;
+            // }
     
-            const {password,role,...rest}=user._doc;
+            // const {password,role,...rest}=user._doc;
     
     
-            //create jwt token
-             const payload={Id:user._id,role:user.role};
-             const secretKey=process.env.JWT_SECRET_KEY;
-             const token=jwt.sign(payload,secretKey,{expiresIn:"15d"})
+            // //create jwt token
+            //  const payload={Id:user._id,role:user.role};
+            //  const secretKey=process.env.JWT_SECRET_KEY;
+            //  const token=jwt.sign(payload,secretKey,{expiresIn:"15d"})
     
              //set the token into the browser token and send the response to the client
             
