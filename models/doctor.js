@@ -25,11 +25,11 @@ const doctorSchema= new mongoose.Schema({
       },
       experience:{
         type:String,
-        required:true
+        default:"specialist"
       },
       speciality:{
         type:String,
-        requred:true
+        default:"dietician"
       },
       password:{
         type : String,
@@ -37,7 +37,7 @@ const doctorSchema= new mongoose.Schema({
       },
       language :{
         type : String,
-        required : true
+        default:"english"
       },
       appoinments :[{
         name : String,

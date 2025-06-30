@@ -82,14 +82,14 @@ export const register=async(req,res)=>{
     }
     else if(user==null){
 
-        // if(role==='User'){
-        //     let code=200;
-        //     let msg="Invalid Input";
-        //     let description ="";
+        if(role==='User'){
+            let code=200;
+            let msg="Invalid Input";
+            let description ="";
     
-        //     res.render("../views/error.ejs",{code,msg,description});
-        //     return;
-        // }
+            res.render("../views/error.ejs",{code,msg,description});
+            return;
+        }
         try {
 
         //     //if user exist then compare password or check password
